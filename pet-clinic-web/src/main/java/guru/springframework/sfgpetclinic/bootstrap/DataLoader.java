@@ -4,13 +4,13 @@ import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.model.Vet;
 import guru.springframework.sfgpetclinic.services.OwnerService;
 import guru.springframework.sfgpetclinic.services.VetService;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class DataLoader implements CommandLineRunner {
-    static Logger logger = Logger.getLogger(DataLoader.class);
     private final OwnerService ownerService;
     private final VetService vetService;
 
@@ -20,7 +20,7 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Owner owner1 = new Owner();
         owner1.setId(1L);
         owner1.setFirstName("Michael");
@@ -35,9 +35,9 @@ public class DataLoader implements CommandLineRunner {
 
         ownerService.save(owner2);
 
-        logger.info("Loading Owners...");
+        log.info("Loading Owners...");
 
-        Vet vet1 = new Vet("Michal","Knight");
+        Vet vet1 = new Vet();
         vet1.setId(1L);
 
         vetService.save(vet1);
@@ -49,7 +49,7 @@ public class DataLoader implements CommandLineRunner {
 
         vetService.save(vet2);
 
-        logger.info("Loading Vets...");
+        log.info("Loading Vets...");
 
 
     }
